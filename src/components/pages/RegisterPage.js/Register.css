@@ -1,0 +1,69 @@
+.register-page{
+    background-image: url(../../images/3kQCtpnfHoUq5cBsLqKTFk.jpg);
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+
+.register {
+    margin: 0px 30%;
+    /* border: 10px solid red; */
+    padding: px 60px;
+    border-radius: 30px;
+    /* border: 10px solid #303030; */
+    /*background-color: #f49e9e;
+      /* width: fit-content; */
+    /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpRyTPHnrIMU9ddhecAZ5A7HTtdwUWrMtDUQ&usqp=CAU);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center; */
+
+     
+  }
+  
+  .register h2,
+  .login h2 {
+    font-size: 40px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-family: "Playfair Display", serif;
+  }
+  
+  .register .input-field,
+  .register .btn,
+  .login .btn {
+    /* border: 5px solid blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  
+  .icon {
+    color: rgb(8, 0, 255);
+    /* border : 5px solid red; */
+  }
+  
+  input {
+    background-color: rgb(74, 19, 192);
+    width: 300px;
+    /* border: 10px solid red; */
+    /* width: 150%; */
+    margin-left: 20px;
+    padding: 10px 15px;
+    border-radius: 30px;
+    font-size: 16px;
+    color: white;
+    /* border: 2px solid rgb(255, 255, 255); */
+  }
+  
+  .register button,
+  .login button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #ef5b5b;
+    font-weight: bold;
+    /* color: white; */
+  }

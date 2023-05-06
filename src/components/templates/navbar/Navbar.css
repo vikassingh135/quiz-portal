@@ -1,0 +1,29 @@
+.navbar {
+    position: sticky;
+    padding: 0px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: rgb(46, 46, 194); */
+  }
+  /* .navbar .log0 {
+    width: 50%;
+  } */
+  
+  .navbar .logo img {
+   
+  }
+  
+  .navbar .nav-links {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .nav-links a {
+    font-family: "Playfair Display", serif;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(13, 241, 249);
+  }

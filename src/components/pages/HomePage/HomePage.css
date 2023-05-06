@@ -1,0 +1,38 @@
+.homepage{
+    background-image: url(../../images/3kQCtpnfHoUq5cBsLqKTFk.jpg);
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+
+.home-page-content {
+    /* height: 100vh; */
+    /* border: 10px solid black; */
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 30%;
+    color: rgb(224, 53, 53);
+    left: 30%;
+  }
+  
+  .home-page-content h2 {
+    font-size: 80px;
+    font-weight: 800;
+    padding: 30px;
+    font-family: "Playfair Display", serif;
+  }
+
+  .home-page-content button {
+    padding: 10px 20px;
+    font-size: 38px;
+    border-radius: 30px;
+    background-color: #ef5bec;
+    font-weight: bold;
+    /* font-style:i ; */
+    color: rgb(86, 32, 211);
+    font-family: "Playfair Display", serif;
+  }
