@@ -1,0 +1,14 @@
+.admin-dashboard-quiz-services {
+    margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-dashboard-quiz-services button{
+    background-color: orangered;
+    width: 300px;
+    margin-top: 30px;
+    font-size: 20px;
+    color: aqua
+}

@@ -1,0 +1,31 @@
+.add-question-form {
+    display: flex;
+    align-items: start;
+    margin-top: -35px;
+    justify-content: center;
+}
+
+
+.add-question-form input, .add-question-form textarea {
+    background-color: #fff;
+    margin-left: 70px;
+    color: black;
+}
+
+.add-question-form h2{
+    margin-bottom: 30px;
+}
+
+.add-question-form .input-field{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.add-question-form .input-field textarea{
+    /* background-color: black; */
+    width: 300px;
+    height: 100px;
+    border-radius: 10px;
+    padding: 10px;
+}

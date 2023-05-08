@@ -1,33 +1,27 @@
-.navbar {
+.navbar-admin {
     position: sticky;
     padding: 0px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color: rgb(46, 46, 194); */
+    background-color: rgb(46, 46, 194);
   }
-  /* .navbar .log0 {
-    width: 50%;
-  } */
+
+.navbar-admin .logo img {
+  width: 25%;
+}
   
   
-  .navbar .nav-links {
-    /* width: 30%; */
-    margin-right: 20px;
-    
+  .navbar-admin .nav-links {
+    width: 30%;
     display: flex;
     justify-content: space-between;
   }
   
-  .nav-links a {
+ .navbar-admin .nav-links a, .nav-links button {
     font-family: "Playfair Display", serif;
     text-decoration: none;
-    font-size: 30px;
-    /* padding-right: 30px; */
+     font-size: 25px;
     font-weight: bold;
     color: rgb(13, 241, 249);
-  }
-
-  .nav-links a button{
-    background-color: orangered;
   }

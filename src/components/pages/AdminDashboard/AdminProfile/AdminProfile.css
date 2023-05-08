@@ -1,0 +1,33 @@
+.profile-table-div{
+    display: flex;
+    justify-content: center;
+}
+
+.profile-table{
+    border-collapse: collapse;
+    padding: 20px 60px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    align-items: center;
+    background-color: yelow;
+    color: blue;
+    background-color: aqua;
+    align-items: center;
+}
+
+.profile-table thead, .profile-table tbody{
+    padding: 10px;
+    font-size: 20px;
+}
+
+.profile-table caption{
+    /* padding: 20px; */
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+
+.profile-table td, .profile-table th{
+    padding: 10px 30px;
+    border: 1px solid blue;
+    
+}

@@ -1,0 +1,28 @@
+.navbar-user {
+  position: sticky;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(46, 46, 194);
+}
+
+.navbar-user .logo img {
+  width: 25%;
+}
+
+.navbar-user .nav-links {
+  /* border: 10px solid red; */
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-user .nav-links a,
+.nav-links button {
+  font-family: "Playfair Display", serif;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: bold;
+  color: rgb(13, 241, 249);
+}

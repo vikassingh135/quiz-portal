@@ -7,9 +7,9 @@
 }
 
 .register {
-    margin: 0px 30%;
+    margin: -40px 30%;
     /* border: 10px solid red; */
-    padding: px 60px;
+    padding: 0px 60px;
     border-radius: 30px;
     /* border: 10px solid #303030; */
     /*background-color: #f49e9e;
@@ -27,6 +27,7 @@
     font-size: 40px;
     padding-bottom: 30px;
     text-align: center;
+    color: aqua;
     font-family: "Playfair Display", serif;
   }
   
@@ -46,7 +47,7 @@
   }
   
   input {
-    background-color: rgb(74, 19, 192);
+    background-color:  rgb(191, 255, 0);;
     width: 300px;
     /* border: 10px solid red; */
     /* width: 150%; */
@@ -63,7 +64,10 @@
     padding: 10px 20px;
     font-size: 18px;
     border-radius: 30px;
-    background-color: #ef5b5b;
+    font-size: 25px;
+    background-color: orangered;
+    /* font-weight: bold; */
+    color: rgb(13, 241, 249);
     font-weight: bold;
     /* color: white; */
   }

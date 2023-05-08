@@ -27,6 +27,7 @@ const LoginPage = () => {
         if(data.error) {
             alert("Error: Login Failed, Please Try Again");
         } else {
+          console.log(data.body);
             authenticate(data, () =>  {
                 setValues({
                     ...values,
@@ -40,9 +41,10 @@ const LoginPage = () => {
 
   const redirectUser = () => {
     if(redirectToReferrer) {
-        return <Navigate to="/user/dashboard" />;
+        if(user.role===1)
+        return <Navigate to="/admin/dashboard" />;
+        else return <Navigate to="/user/dashboard" />;
     }
-    if(isAuthenticated()) <Navigate to="/" />;
   }
 
   return (
