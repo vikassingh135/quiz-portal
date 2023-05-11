@@ -2,10 +2,5 @@
     margin: 40px 10px 10px 40px;
     display: flex;
     flex-wrap: wrap;
-}
-
-.add-quiz-button {
-    display: flex;
-    margin-top: 30px;
     justify-content: center;
 }

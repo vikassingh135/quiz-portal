@@ -1,7 +1,8 @@
 import React from "react";
 import { isAuthenticated, signout } from "../../auth";
-import { Navigate } from "react-router-dom";
+import {Link,  Navigate } from "react-router-dom";
 import NavbarUser from "../../templates/UsersNavbar/NavBarAdmin/NavbarUser/NavbarUser";
+import './UserDashboard.css';
 
 const UserDashboard = () => {
   // const jwt = isAuthenticated();
@@ -14,8 +15,12 @@ const UserDashboard = () => {
   return (
     <div>
     <NavbarUser/>  
-    <h1>Welcome Student, Soon we will update test for you! !</h1>
-     
+    <div className="user-dashboard-quiz-services">
+    <h1>Quiz Services</h1>
+    
+      <Link to='/user/Categories'> <button>Categories Page</button></Link>
+      <Link to='/user/showQuizzes'><button>Show Quizzes</button></Link>
+    </div>
     </div>
   );
 };

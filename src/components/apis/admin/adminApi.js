@@ -35,6 +35,26 @@ export const getCategoryById = (id) => {
     })
 }
 
+export const getQuizById = (id) => {
+    return fetch(`${API}/quiz/get/${id}`, {
+        method: 'GET',
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.error(err);
+    })
+}
+
+export const getQuizByCategoryId = (categoryId) => {
+    return fetch(`${API}/quiz/byCategory/${categoryId}`, {
+        method: 'GET'
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.error(err);
+    })
+}
+
 export const addQuiz = (quiz) => {
     return fetch(`${API}/quiz/create`, {
         method:'POST',
@@ -82,5 +102,25 @@ export const addQuestion = (question) => {
         return  response.json();
     }).catch(err => {
         console.error(err);
+    })
+}
+
+export const deleteCategoryById = (categoryId) => {
+    return fetch(`${API}/category/${categoryId}`, {
+        method: 'DELETE'
+    }).then(response=> {
+        return response.json();
+    }).catch(error => {
+        console.error(error);
+    })
+}
+
+export const deleteQuestionById = (questionId) => {
+    return fetch(`${API}/question/${questionId}`, {
+        method: 'DELETE'
+    }).then(response => {
+        return response.json();
+    }).catch(error => {
+        console.error(error);
     })
 }

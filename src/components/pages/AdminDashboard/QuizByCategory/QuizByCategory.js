@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import './ShowQuiz.css';
+import './QuizByCategory.css';
 import NavbarAdmin from '../../../templates/UsersNavbar/NavBarAdmin/NavbarAdmin/NavbarAdmin';
-import { showQuizzes } from '../../../apis/admin/adminApi';
+import { getQuizByCategoryId, showQuizzes } from '../../../apis/admin/adminApi';
 import {PrintQuizTable} from '../../../templates/PrintTable/PrintTable';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AddQuiz from '../AddQuiz/AddQuiz';
 import { Button, Typography } from '@mui/material';
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
-const ShowQuiz = () => {
+
+const QuizByCategory = () => {
+
+  const {state} = useLocation();  
 
   const [quizzes, setQuizzes] = useState([]) ; 
 
   useEffect(()=>{
-    showQuizzes().then(data => {
+    console.log(state);
+    getQuizByCategoryId(state.categoryId).then(data => {
         if(data.error) {
             console.error(data.error);
         }
-        setQuizzes(data);
+         else setQuizzes(data);
     })
   },[])
 
@@ -25,17 +29,22 @@ const ShowQuiz = () => {
       <NavbarAdmin/>
       <Typography variant='h3' sx={{textAlign:"center", mt:3}}>All Quizzes</Typography>
       <div className="quiz-table-div">
-     
-           {/* {
-           quizzes.map((curValue) => {
-            const { _id, title, description } = curValue;
-           <tr key={_id}>
-              <td>{title}</td>
-              <td>{description}</td>
-            </tr>;
-          })
-    } */}
+      {/* <table className="category-table"> */}
+       
+           
+           {
+        //    quizzes.map((curValue) => {
+        //     const { _id, title, description } = curValue;
+        //    <tr key={_id}>
+        //       <td>{title}</td>
+        //       <td>{description}</td>
+        //     </tr>;
+        //   })
+    }
+    {/* {console.log(quizzes)} */}
     <PrintQuizTable quizzes={quizzes} />  
+        {/* </tbody>
+      </table> */}
       </div>
       <div className='add-quiz-button'>
       <Link to='/admin/addQuiz'>
@@ -46,4 +55,4 @@ const ShowQuiz = () => {
   )
 }
 
-export default ShowQuiz
+export default QuizByCategory

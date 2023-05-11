@@ -1,6 +1,6 @@
 .navbar-user {
   position: sticky;
-  padding: 0px 20px;
+  padding: 20px 40px 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,17 +12,9 @@
 }
 
 .navbar-user .nav-links {
-  /* border: 10px solid red; */
   width: 30%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.navbar-user .nav-links a,
-.nav-links button {
-  font-family: "Playfair Display", serif;
-  text-decoration: none;
-  font-size: 25px;
-  font-weight: bold;
-  color: rgb(13, 241, 249);
-}

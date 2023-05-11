@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./AddQuiz.css";
 import NavbarAdmin from "../../../templates/UsersNavbar/NavBarAdmin/NavbarAdmin/NavbarAdmin";
 import { addQuiz, getCategories } from "../../../apis/admin/adminApi";
+import Swal from "sweetalert2";
+import { TextField, Typography, Button, Switch } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const AddQuiz = () => {
   const [categories, setCategories] = useState([]);
@@ -13,10 +18,11 @@ const AddQuiz = () => {
     description: "",
     maxMarks: "",
     numberOfQuestions: "",
-    category: "",
+    category: null,
+    active: true
   });
 
-  const { title, description, maxMarks, numberOfQuestions, category } =
+  const { title, description, maxMarks, numberOfQuestions, category, active } =
     quizValues;
 
   const handleChange = (name) => (event) => {
@@ -24,14 +30,29 @@ const AddQuiz = () => {
     setQuizValues({ ...quizValues, [name]: event.target.value });
   };
 
+  const handleChangeActive = () => {
+    setQuizValues({ ...quizValues, active: !active });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(quizValues);
     addQuiz(quizValues).then((data) => {
       if (data.error) {
-        alert("Faild: Please Try Again");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Category can not be added! Please Try Again",
+        });
       } else {
-        alert("Congrats!! Quiz had been added successfully");
+        Swal.fire("Congrats!!", "Quiz Added Successfully", "success");
+        setQuizValues({
+          title: "",
+          description: "",
+          maxMarks: "",
+          numberOfQuestions: "",
+          category: "",
+        });
       }
     });
   };
@@ -62,70 +83,89 @@ const AddQuiz = () => {
   return (
     <div>
       <NavbarAdmin />
+      <Typography variant="h2" sx={{ m: 3, fontWeight: 600 }}>
+        Add Quiz Form
+      </Typography>
       <div className="add-quiz-div">
-        <form className="addQuizForm">
-          <div className="input-field">
-            <label htmlFor="title">Enter the title : </label>
-            <input
-              placeholder="Enter Title"
-              id="title"
-              value={title}
-              onChange={handleChange("title")}
-            />
-            <br />
-          </div>
-          <div className="input-field">
-            <label htmlFor="description">Enter Description : </label>
-            <input
-              placeholder="Enter Description"
-              id="description"
-              value={description}
-              onChange={handleChange("description")}
-            />
-            <br />
-          </div>
-          <div className="input-field">
-            <label htmlFor="maxMarks">Maximum Marks : </label>
-            <input
-              type="number"
-              placeholder="Maximum Marks"
-              id="maxMarks"
-              value={maxMarks}
-              onChange={handleChange("maxMarks")}
-            />
-            <br />
-          </div>
-          <div className="input-field">
-            <label htmlFor="noOfQuestions">No. of Questions : </label>
-            <input
-              type="number"
-              placeholder="Number of Questions"
-              id="noOfQuestions"
-              value={numberOfQuestions}
-              onChange={handleChange("numberOfQuestions")}
-            />
-            <br />
-          </div>
-          <div className="input-field">
-            <label>Choose Category: </label>
-            <select
-              onChange={(event) => {
-                console.log(event, event.target.value, quizValues);
-                setCategoryId(event.target.value);
-                setQuizValues({ ...quizValues, [category]: categoryId });
-                console.log(event, event.target.value, quizValues);
-              }}
-            >
-              {categories.map((c, i) => (
-                <option key={i} id={c._id} value={c._id}>
-                  {c.title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="input-field">
-            <button onClick={handleSubmit}>Create Quiz</button>
-          </div>
+        <form>
+          <TextField
+            required
+            id="filled-required"
+            label="Title"
+            value={title}
+            variant="filled"
+            onChange={handleChange("title")}
+            size="medium"
+          />
+          <TextField
+            required
+            id="filled-required"
+            label="Description"
+            variant="filled"
+            value={description}
+            onChange={handleChange("description")}
+          />
+          <TextField
+            id="filled-number"
+            label="Max Marks"
+            type="number"
+            value={maxMarks}
+            onChange={handleChange("maxMarks")}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="filled"
+          />
+          <TextField
+            id="filled-number"
+            label="Number of Questions"
+            type="number"
+            value={numberOfQuestions}
+            onChange={handleChange("numberOfQuestions")}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="filled"
+          />
+
+          <TextField
+            id="filled-select-currency"
+            select
+            label="Choose Category"
+            helperText="Please select Quiz Category"
+            variant="filled"
+            onChange={(event) => {
+              console.log(event, event.target.value, quizValues);
+              setCategoryId(event.target.value);
+              setQuizValues({ ...quizValues, [category]: categoryId });
+              console.log(event, event.target.value, quizValues);
+            }}
+          >
+            {categories.map((option, i) => (
+              <MenuItem key={i} value={option._id}>
+                {option.title}
+              </MenuItem>
+            ))}
+          </TextField>
+          <FormControlLabel
+            label="Quiz Status"
+            control={
+              <Switch
+              defaultChecked={true}
+                onChange={handleChangeActive}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            }
+          />
+
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{ fontSize: "18px" }}
+          >
+            <AddCircleSharpIcon sx={{ mr: 1 }} />
+            Create Quiz
+          </Button>
         </form>
       </div>
     </div>

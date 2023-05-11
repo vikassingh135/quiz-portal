@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ShowQuiz from "../../pages/AdminDashboard/ShowQuiz/ShowQuiz";
 import { Link, Navigate } from "react-router-dom";
 import AddCategory from "../../pages/AdminDashboard/AddCategory/AddCategory";
-import { deleteCategoryById, deleteQuestionById, getCategoryById } from "../../apis/admin/adminApi";
+import { deleteCategoryById, getCategoryById } from "../../apis/admin/adminApi";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -31,8 +31,13 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import CheckIcon from "@mui/icons-material/Check";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ToggleOnIcon from "@mui/icons-material/ToggleOn";
-import ToggleOffIcon from "@mui/icons-material/ToggleOff";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import Radio from "@mui/material/Radio";
+import RadioGroup, { useRadioGroup } from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import PrintCurrQuestion from "./PrintCurrQuestion";
 
 // const PrintTable = ({ categories }) => {
 //   return (
@@ -55,15 +60,16 @@ const PrintTable = ({ categories }) => {
   const navigate = useNavigate();
 
   const onViweClick = (id) => {
-    navigate("/admin/showQuizByCategory", { state: { categoryId: id } });
+    navigate("/user/showQuizByCategory", { state: { categoryId: id } });
   };
 
   const onDeleteClick = (categoryId) => {
+    alert(categoryId);
     deleteCategoryById(categoryId).then((data) => {
       console.log(data);
       if (data.error) {
-        Swal.fire(data.error);
-      } else Swal.fire("Category Deleted Successfully");
+        alert(data.error);
+      } else alert("Congrats Deleted Successfully");
     });
   };
 
@@ -74,7 +80,7 @@ const PrintTable = ({ categories }) => {
 
         return (
           <div>
-            <Card sx={{ margin: 3 }}>
+            <Card sx={{ m: 3 }}>
               <CardMedia
                 sx={{ height: 150, width: 320 }}
                 image="https://wallpapercave.com/wp/wp7250087.jpg"
@@ -89,27 +95,14 @@ const PrintTable = ({ categories }) => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <ButtonGroup
-                  variant="contained"
-                  aria-label="outlined primary button group"
+                <Button
+                  color="success"
+                  sx={{ ml: "40%", fontSize: 16 }}
+                  startIcon={<RemoveRedEyeSharpIcon />}
+                  onClick={() => onViweClick(_id)}
                 >
-                  <Button
-                    color="success"
-                    startIcon={<RemoveRedEyeSharpIcon />}
-                    onClick={() => onViweClick(_id)}
-                  >
-                    View
-                  </Button>
-                  <Button startIcon={<UpgradeSharpIcon />}>Update</Button>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    startIcon={<DeleteIcon />}
-                    onClick={() => onDeleteClick(_id)}
-                  >
-                    Delete
-                  </Button>
-                </ButtonGroup>
+                  View
+                </Button>
               </CardActions>
             </Card>
           </div>
@@ -122,8 +115,8 @@ const PrintTable = ({ categories }) => {
 const PrintQuizTable = ({ quizzes }) => {
   const navigate = useNavigate();
 
-  const showQuestionHandler = (_id) => {
-    navigate(`/quiz/showQuestions/${_id}`, {});
+  const attemptQuizHandler = (_id) => {
+    navigate(`/quiz/attemptQuiz/${_id}`, {});
   };
 
   return (
@@ -162,18 +155,14 @@ const PrintQuizTable = ({ quizzes }) => {
               <Typography color="error">
                 Number of Questions: {numberOfQuestions}
               </Typography>
-              <Typography color="blue">
-                Quiz Status :{" "}
-                {active ? (
-                  <ToggleOnIcon fontSize="large" />
-                ) : (
-                  <ToggleOffIcon fontSize="large" />
-                )}
-              </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" onClick={() => showQuestionHandler(_id)}>
-                Show Questions
+              <Button
+                size="small"
+                onClick={() => attemptQuizHandler(_id)}
+                startIcon={<PlayArrowIcon />}
+              >
+                Attempt Quiz
               </Button>
             </CardActions>
           </Card>
@@ -218,18 +207,12 @@ const PrintQuizTableUser = ({ quizzes }) => {
 
 const PrintQuestionTable = ({ questions }) => {
   let i = 0;
+
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
-
-  const deleteQuestion = (id) => {
-     alert("clicked");
-      deleteQuestionById(id).then(response => {
-        Swal.fire('Question deleted successfully');
-      })
-  }
 
   return (
     <>
@@ -246,7 +229,7 @@ const PrintQuestionTable = ({ questions }) => {
         } = currQuestion;
 
         return (
-          <List key={_id}
+          <List
             sx={{ width: "90%", pl: 30, mb: 5, bgcolor: "background.paper" }}
             component="nav"
             aria-labelledby="nested-list-subheader"
@@ -305,7 +288,7 @@ const PrintQuestionTable = ({ questions }) => {
                 </ListItemButton>
               </List>
             </Collapse>
-            <ListItemButton sx={{ ml: 120 }} onClick={()=>deleteQuestion(_id)}>
+            <ListItemButton sx={{ ml: 120 }}>
               <ListItemIcon>
                 <DeleteIcon sx={{ color: "red" }} />
               </ListItemIcon>
@@ -338,10 +321,93 @@ const PrintQuestionTableUser = ({ questions }) => {
   );
 };
 
+const PrintQuestions = (props) => {
+  // let selectedValue = new Array(questions.length).fill('-');
+
+
+  // const handleSelectedValue = ({i,ans}) => {
+  //   selectedValue[i] = ans;
+  //   console.log(selectedValue);
+  // }
+
+  // useEffect(()=>{
+  //   setSelectedValue(Array(questions.length).fill('N'));
+  // },[])
+
+
+  const questions = props.questions;
+
+  const [value, setValue] = useState("");
+
+  // const {content,optionA,optionB,optionC,optionD,correctAnswer} = currQuestion;
+
+  const handleChange = (data) => (event) => {
+    const { key, value } = data;
+
+    // selectedValue[key] = event.target.value;
+    console.log(questions);
+    // console.log(data)
+
+    // setValue(event.target.value);
+  };
+
+  console.log(questions);
+
+  return (
+    <>
+      {questions.map((currQuestion,i) => {
+        const {
+          _id,
+          content,
+          optionA,
+          optionB,
+          optionC,
+          optionD,
+          correctAnswer,
+        } = currQuestion;
+        // return <h2>Hello World</h2>
+        return <PrintCurrQuestion currQuestion={currQuestion} handleSelectedValue = {props.handleSelectedValue} i = {i}/>
+      })}
+    </>
+  );
+};
+
+// const PrintCurrQuestion = ({currQuestion}) => {
+
+//   const [value, setValue] = useState('');
+
+//   console.log(currQuestion);
+
+//   const {content,optionA,optionB,optionC,optionD,correctAnswer} = currQuestion;
+
+//   const handleChange = (event) => {
+//     setValue(event.target.value);
+//   };
+
+// return (
+//   <FormControl sx={{display:"flex", pl:30}}>
+//   <FormLabel id="demo-controlled-radio-buttons-group" sx={{fontSize:20, color:"black", fontWeight:"500"}}>{content}</FormLabel>
+//   <RadioGroup
+//     aria-labelledby="demo-controlled-radio-buttons-group"
+//     name="controlled-radio-buttons-group"
+//     value={value}
+//     onChange={handleChange}
+//     sx={{mb:3}}
+//   >
+//     <FormControlLabel value="A" control={<Radio />} label={optionA} />
+//     <FormControlLabel value="B" control={<Radio />} label={optionB} />
+//     <FormControlLabel value="C" control={<Radio />} label={optionC} />
+//     <FormControlLabel value="D" control={<Radio />} label={optionD} />
+//   </RadioGroup>
+// </FormControl>
+// )
+// }
+
 export {
   PrintTable,
   PrintQuizTable,
   PrintQuizTableUser,
   PrintQuestionTable,
   PrintQuestionTableUser,
+  PrintQuestions,
 };
