@@ -5,11 +5,19 @@ footer{
     align-items: flex-start;
     padding: 30px 190px;
     line-height: 1.4;
+    /* margin-top: 70px; */
 }
-
+/* 
 footer .logo img{
     width: 200px;
     height: 100px;
+} */
+
+footer .logo{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-link ul, .support ul, .newsletter ul{

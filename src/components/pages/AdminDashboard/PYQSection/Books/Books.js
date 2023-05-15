@@ -47,7 +47,6 @@ const Books = () => {
   }
 
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -58,9 +57,8 @@ const Books = () => {
 
   return (
     <div>
-      <NavbarAdmin />
+      
       <Box sx={{ m: 2 }}>
-        <Typography variant="h2">Books / Guides For B.Tech.</Typography>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <Button variant="outlined" onClick={handleClickOpen}>
             Add Study Materials
@@ -102,9 +100,8 @@ const Books = () => {
                 onChange={handleChange("content_type")}
               >
                 <MenuItem value="books">Books</MenuItem>
-                <MenuItem value="guides">Guides</MenuItem>
                 <MenuItem value="notes">HandWritten Notes</MenuItem>
-                <MenuItem value="PYQ">Previous Year Questions</MenuItem>
+                <MenuItem value="pyq">Previous Year Questions</MenuItem>
               </Select>
             </Box>
             <Box sx={{ mt: 2 }}>

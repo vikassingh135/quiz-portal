@@ -176,10 +176,20 @@ export const getAllStudyMaterials = () => {
     })
 }
 
-export const getBooksBySem = (semester) => {
-    return fetch(`${API}/studyMaterials/listBooksBySem/${semester}`,{
+export const getBooksBySem = (year) => {
+    return fetch(`${API}/studyMaterials/listBooksBySem/${year}`,{
         method:"GET"
     } ).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.error(err);
+    })
+}
+
+export const getStudyMaterialsBytype = ({year,type}) => {
+    return fetch(`${API}/studyMaterials/listStudyMaterialByType/${year}/${type}`, {
+        method: 'GET'
+    }).then(response => {
         return response.json();
     }).catch(err => {
         console.error(err);

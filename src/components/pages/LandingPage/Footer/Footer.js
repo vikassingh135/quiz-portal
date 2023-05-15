@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer>
       <div class="logo">
-        <img src="https://th.bing.com/th/id/OIP.fzi9ElnEuAYVLFUAKpbnPQAAAA?pid=ImgDet&rs=1" />
+        <h3>QvCarrier</h3>
       </div>
       <div class="main-link">
         <h3>Main Links</h3>

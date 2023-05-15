@@ -2,6 +2,7 @@ import React from 'react'
 import NavbarAdmin from '../../templates/UsersNavbar/NavBarAdmin/NavbarAdmin/NavbarAdmin'
 import { Link } from 'react-router-dom'
 import './AdminDashboard.css';
+import Books from './PYQSection/Books/Books';
 
 const AdminDashboard = () => {
   return (
@@ -14,13 +15,9 @@ const AdminDashboard = () => {
       <Link to='/admin/addQuiz'><button>Create Quiz</button></Link>
       <Link to='/admin/showQuizzes'><button>Show Quizzes</button></Link>
       </div>
-      <div className='admin-dashboard-quiz-services'>
-        
-      <h1>PYQ Services</h1>
-      <Link to='/admin/notes'> <button>HandWritten Notes</button></Link>
-      <Link to='/admin/books'><button>Books / Guides</button></Link>
-      <Link to='/admin/pyq'><button>Previous Year Questions</button></Link>
-      </div>
+
+      <h1>Study Materials Services</h1>
+      <Books/>
     </div>
   )
 }
