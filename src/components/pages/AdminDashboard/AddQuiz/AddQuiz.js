@@ -18,7 +18,7 @@ const AddQuiz = () => {
     description: "",
     maxMarks: "",
     numberOfQuestions: "",
-    category: null,
+    category: "",
     active: true
   });
 
@@ -137,7 +137,7 @@ const AddQuiz = () => {
             onChange={(event) => {
               console.log(event, event.target.value, quizValues);
               setCategoryId(event.target.value);
-              setQuizValues({ ...quizValues, [category]: categoryId });
+              setQuizValues({ ...quizValues, category: event.target.value });
               console.log(event, event.target.value, quizValues);
             }}
           >

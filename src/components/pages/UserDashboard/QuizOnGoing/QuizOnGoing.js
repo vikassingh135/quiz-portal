@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./QuizOnGoing.css";
-import { addQuestion, showQuestions } from "../../../apis/admin/adminApi";
+import { addQuestion, saveCompletedTest, showQuestions } from "../../../apis/admin/adminApi";
 import NavbarAdmin from "../../../templates/UsersNavbar/NavBarAdmin/NavbarAdmin/NavbarAdmin";
 import { PrintQuestionTableUser } from "../../../templates/PrintTable/PrintTable";
 import { PrintQuestionTablefrom } from "../../../templates/PrintTable/PrintTable";
@@ -14,6 +14,8 @@ import FormLabel from "@mui/material/FormLabel";
 import { Typography, Box, Button } from "@mui/material";
 import { PrintQuestions } from "../../../templates/PrintTableUser/PrintTableUser";
 import Swal from "sweetalert2";
+import CircleTimer from "../Timer/CircleTimer";
+
 
 
 
@@ -84,12 +86,19 @@ const QuizOnGoing = () => {
     // setScore(result);
 
     score = (calculatedScore(selectedValue,questions));
-    console.log(score);
-    Swal.fire(
-      'Good job!',
-      `Your score is ${score}`,
-      'success'
-    )
+    console.log(score, JSON.parse(localStorage.getItem("jwt")).user._id);
+    saveCompletedTest({user: JSON.parse(localStorage.getItem("jwt")).user._id, quiz: state.quizId, user_answers: selectedValue}).then((data) => {
+      if(data.error) {
+        alert(data.error);
+      } else {
+        Swal.fire(
+          'Good job!',
+          `Test saved successfully and Your score is ${score}`,
+          'success'
+        )
+      }
+    })
+    
   }
 
 
@@ -100,6 +109,7 @@ const QuizOnGoing = () => {
       <Typography variant="h2" sx={{ mt: 5 }}>
         Questions
       </Typography>
+      <CircleTimer time = {questions.length*2} handleSubmit = {handleSubmit}/>
       <Typography variant="h6" sx={{ mt: 5, mb: 4, ml: 30 }}>
         Please read Questions carefully before answering them : -
       </Typography>

@@ -124,3 +124,64 @@ export const deleteQuestionById = (questionId) => {
         console.error(error);
     })
 }
+
+
+export const saveCompletedTest = (data) => {
+    return fetch(`${API}/completedTest/save`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(response => {
+        return response.json();
+    }).catch(error => {
+        console.error(error);
+    })
+}
+
+export const viewCompletedTest= (userId) => {
+    return fetch(`${API}/completedTest/view/${userId}`, {
+        method: 'GET',
+    }).then(response => {
+        return response.json();
+    }).catch(error => {
+        console.error(error);
+    })
+}
+
+export const saveStudyMaterial = (data) => {
+    return fetch(`${API}/studyMaterials/save`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(response => {
+        return response.json();
+    }).catch(error => {
+        console.error(error);
+    })
+}
+
+export const getAllStudyMaterials = () => {
+    return fetch(`${API}/studyMaterials/listAll`, {
+        method: 'GET',
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.error(err);
+    })
+}
+
+export const getBooksBySem = (semester) => {
+    return fetch(`${API}/studyMaterials/listBooksBySem/${semester}`,{
+        method:"GET"
+    } ).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.error(err);
+    })
+}

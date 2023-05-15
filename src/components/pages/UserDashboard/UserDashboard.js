@@ -20,6 +20,7 @@ const UserDashboard = () => {
     
       <Link to='/user/Categories'> <button>Categories Page</button></Link>
       <Link to='/user/showQuizzes'><button>Show Quizzes</button></Link>
+      <Link to='/user/completed_tests'><button>Completed Tests</button></Link>
     </div>
     </div>
   );

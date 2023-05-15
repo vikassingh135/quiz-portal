@@ -14,6 +14,13 @@ const AdminDashboard = () => {
       <Link to='/admin/addQuiz'><button>Create Quiz</button></Link>
       <Link to='/admin/showQuizzes'><button>Show Quizzes</button></Link>
       </div>
+      <div className='admin-dashboard-quiz-services'>
+        
+      <h1>PYQ Services</h1>
+      <Link to='/admin/notes'> <button>HandWritten Notes</button></Link>
+      <Link to='/admin/books'><button>Books / Guides</button></Link>
+      <Link to='/admin/pyq'><button>Previous Year Questions</button></Link>
+      </div>
     </div>
   )
 }

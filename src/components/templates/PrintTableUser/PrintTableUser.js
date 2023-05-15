@@ -324,7 +324,6 @@ const PrintQuestionTableUser = ({ questions }) => {
 const PrintQuestions = (props) => {
   // let selectedValue = new Array(questions.length).fill('-');
 
-
   // const handleSelectedValue = ({i,ans}) => {
   //   selectedValue[i] = ans;
   //   console.log(selectedValue);
@@ -333,7 +332,6 @@ const PrintQuestions = (props) => {
   // useEffect(()=>{
   //   setSelectedValue(Array(questions.length).fill('N'));
   // },[])
-
 
   const questions = props.questions;
 
@@ -355,7 +353,7 @@ const PrintQuestions = (props) => {
 
   return (
     <>
-      {questions.map((currQuestion,i) => {
+      {questions.map((currQuestion, i) => {
         const {
           _id,
           content,
@@ -366,42 +364,168 @@ const PrintQuestions = (props) => {
           correctAnswer,
         } = currQuestion;
         // return <h2>Hello World</h2>
-        return <PrintCurrQuestion currQuestion={currQuestion} handleSelectedValue = {props.handleSelectedValue} i = {i}/>
+        return (
+          <PrintCurrQuestion
+            currQuestion={currQuestion}
+            handleSelectedValue={props.handleSelectedValue}
+            i={i}
+          />
+        );
       })}
     </>
   );
 };
 
-// const PrintCurrQuestion = ({currQuestion}) => {
+const PrintCompletedTest = (props) => {
+  console.log(props.tests);
 
-//   const [value, setValue] = useState('');
+  const navigate = useNavigate();
 
-//   console.log(currQuestion);
+  const onviewClick = (data)=> {
+    navigate(`/view/attempt`, {state : {user_answers :data.user_answers, quizId: data.quiz}})
+  }
 
-//   const {content,optionA,optionB,optionC,optionD,correctAnswer} = currQuestion;
+  return (
+    <>
+      {props.tests.map((test) => {
+        const { _id, quiz, user_answers } = test;
 
-//   const handleChange = (event) => {
-//     setValue(event.target.value);
-//   };
+        {
+          return (
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Quiz Id : {quiz}
+              </Typography>
+              <Typography variant="h5" component="div">
+                Completed Quiz 
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                adjective
+              </Typography>
+              <Button
+                  // color="success"
+                  sx={{ ml: "5%", fontSize: 16 }}
+                  startIcon={<RemoveRedEyeSharpIcon />}
+                  onClick={() => onviewClick({quiz,user_answers})}
+                >
+                  View
+                </Button>
+            </CardContent>
+          );
+        }
+      })}
+    </>
+  );
+};
 
-// return (
-//   <FormControl sx={{display:"flex", pl:30}}>
-//   <FormLabel id="demo-controlled-radio-buttons-group" sx={{fontSize:20, color:"black", fontWeight:"500"}}>{content}</FormLabel>
-//   <RadioGroup
-//     aria-labelledby="demo-controlled-radio-buttons-group"
-//     name="controlled-radio-buttons-group"
-//     value={value}
-//     onChange={handleChange}
-//     sx={{mb:3}}
-//   >
-//     <FormControlLabel value="A" control={<Radio />} label={optionA} />
-//     <FormControlLabel value="B" control={<Radio />} label={optionB} />
-//     <FormControlLabel value="C" control={<Radio />} label={optionC} />
-//     <FormControlLabel value="D" control={<Radio />} label={optionD} />
-//   </RadioGroup>
-// </FormControl>
-// )
-// }
+
+const PrintCompletedTestDetails = ({questions, user_answers}) => {
+
+
+  console.log(questions, user_answers);
+
+  let i = 0;
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <>
+      {questions.map((currQuestion, i) => {
+        i++;
+        const {
+          _id,
+          content,
+          optionA,
+          optionB,
+          optionC,
+          optionD,
+          correctAnswer,
+        } = currQuestion;
+
+        return (
+          <List
+            sx={{ width: "90%", pl: 30, mb: 5, bgcolor: "background.paper" }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+            subheader={
+              <Typography
+                component="div"
+                id="nested-list-subheader"
+                variant="h5"
+              >
+                {i}. {content}
+              </Typography>
+            }
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <Typography variant="h6">A{")"}</Typography>
+              </ListItemIcon>
+              <Typography variant="h6">{optionA}</Typography>
+            </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <Typography variant="h6">B{")"}</Typography>
+              </ListItemIcon>
+              <Typography variant="h6">{optionB}</Typography>
+            </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <Typography variant="h6">C{")"}</Typography>
+              </ListItemIcon>
+              <Typography variant="h6">{optionC}</Typography>
+            </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <Typography variant="h6">D{")"}</Typography>
+              </ListItemIcon>
+              <Typography variant="h6">{optionD}</Typography>
+            </ListItemButton>
+            <ListItemButton onClick={handleClick}>
+              <ListItemIcon>
+                {open ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </ListItemIcon>
+              <Typography variant="h6" sx={{ mr: 2 }}>
+                View Answers
+              </Typography>
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <CheckIcon sx={{ color: "green" }} />
+                  </ListItemIcon>
+                  <Typography variant="h6" color="green" sx={{ mr: 2 }}>
+                    Correct Answer : {correctAnswer}
+                  </Typography>
+                </ListItemButton>
+              </List>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <CheckIcon sx={{ color: correctAnswer==user_answers[i] ? "green" : "red" }} />
+                  </ListItemIcon>
+                  <Typography variant="h6" color="green" sx={{ mr: 2 }}>
+                    Your answer : {user_answers[i]}
+                  </Typography>
+                </ListItemButton>
+              </List>
+            </Collapse>
+          </List>
+        );
+      })}
+    </>
+  );
+}
 
 export {
   PrintTable,
@@ -410,4 +534,6 @@ export {
   PrintQuestionTable,
   PrintQuestionTableUser,
   PrintQuestions,
+  PrintCompletedTest,
+  PrintCompletedTestDetails
 };

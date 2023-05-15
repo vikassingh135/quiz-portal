@@ -24,7 +24,8 @@ const PrintCurrQuestion = (props) => {
  
 return (
   <FormControl sx={{display:"flex", pl:30}}>
-  <FormLabel id="demo-controlled-radio-buttons-group" sx={{fontSize:20, color:"black", fontWeight:"500"}}>{content}</FormLabel>
+  <FormLabel id="demo-controlled-radio-buttons-group" sx={{fontSize:20, color:"black", fontWeight:"500"}}>{props.i
+  +1}. {content}</FormLabel>
   <RadioGroup
     aria-labelledby="demo-controlled-radio-buttons-group"
     name="controlled-radio-buttons-group"

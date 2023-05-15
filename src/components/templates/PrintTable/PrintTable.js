@@ -33,7 +33,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";
-
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 // const PrintTable = ({ categories }) => {
 //   return (
 //     <>
@@ -184,11 +184,19 @@ const PrintQuizTable = ({ quizzes }) => {
 };
 
 const PrintQuizTableUser = ({ quizzes }) => {
+  const navigate = useNavigate();
+
+  
+  const attemptQuizHandler = (_id) => {
+    navigate(`/quiz/attemptQuiz/${_id}`, {});
+  };
+
   return (
     <>
       {quizzes.map((curUser) => {
         const {
           _id,
+          active,
           title,
           description,
           maxMarks,
@@ -196,20 +204,40 @@ const PrintQuizTableUser = ({ quizzes }) => {
           category,
           createdAt,
         } = curUser;
+
+        console.log(curUser);
+
         return (
-          <tr key={_id}>
-            <td>{title}</td>
-            <td>{description}</td>
-            <td>{maxMarks}</td>
-            <td>{numberOfQuestions}</td>
-            <td>{category}</td>
-            <td>{createdAt}</td>
-            <td>
-              <Link to={`/quiz/attemptQuiz/${_id}`}>
-                <button>Attempt Quiz</button>
-              </Link>
-            </td>
-          </tr>
+          <Card sx={{ minWidth: 275, m: 2 }} key={_id}>
+            <CardContent>
+              <Typography
+                sx={{ fontSize: 14 }}
+                color="text.secondary"
+                gutterBottom
+              >
+                Category : {category}
+              </Typography>
+              <Typography variant="h5" component="div">
+                {title}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                {description}
+              </Typography>
+              <Typography color="green">Max Marks: {maxMarks}</Typography>
+              <Typography color="error">
+                Number of Questions: {numberOfQuestions}
+              </Typography>
+            </CardContent>
+            <CardActions>
+            <Button
+                size="small"
+                onClick={() => attemptQuizHandler(_id)}
+                startIcon={<PlayArrowIcon />}
+              >
+                Attempt Quiz
+              </Button>
+            </CardActions>
+          </Card>
         );
       })}
     </>

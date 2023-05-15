@@ -1,0 +1,40 @@
+footer{
+    background-color: #1976d2;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 30px 190px;
+    line-height: 1.4;
+}
+
+footer .logo img{
+    width: 200px;
+    height: 100px;
+}
+
+.main-link ul, .support ul, .newsletter ul{
+    list-style-type: none;
+    /* margin-left: -40px; */
+}
+
+.follow-icons{
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    align-items: center;
+}
+
+.follow-icons > div {
+    padding-right: 30%;
+}
+
+.follow-us{
+    padding: 7px 0px;
+}
+
+.follow-us-heading{
+    margin-top: -5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+

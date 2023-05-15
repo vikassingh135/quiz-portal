@@ -8,7 +8,7 @@ const HomePage = () => {
       <Navbar />
       <div class="home-page-content">
         <h2>Welcome To Quiz</h2>
-        <button>Get Started</button>
+        <a href="/login"><button>Get Started</button></a>
       </div>
     </div>
   );
