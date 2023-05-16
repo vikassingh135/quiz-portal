@@ -5,6 +5,7 @@ import PrintGuides from "../../../templates/PrintTableMain/PrintTableMain";
 import "./Guides.css";
 import { getAllStudyMaterials, getBooksBySem, getStudyMaterialsBytype } from "../../../apis/admin/adminApi";
 import { useLocation, useParams } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 const Guides = () => {
 
@@ -37,6 +38,7 @@ const Guides = () => {
       <div className="guides">
         <PrintGuides guides = {guides}/>
         </div>
+        <Footer />
     </div>
   );
 };

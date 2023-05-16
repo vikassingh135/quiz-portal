@@ -4,7 +4,7 @@ import { addQuestion, saveCompletedTest, showQuestions } from "../../../apis/adm
 import NavbarAdmin from "../../../templates/UsersNavbar/NavBarAdmin/NavbarAdmin/NavbarAdmin";
 import { PrintQuestionTableUser } from "../../../templates/PrintTable/PrintTable";
 import { PrintQuestionTablefrom } from "../../../templates/PrintTable/PrintTable";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
 import NavbarUser from "../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/NavbarUser";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -37,6 +37,9 @@ const calculatedScore = (selectedValue, questions)=> {
 
 
 const QuizOnGoing = () => {
+
+  const navigate = useNavigate();
+
   const { state } = useLocation();
   console.log(state);
 
@@ -93,12 +96,12 @@ const QuizOnGoing = () => {
       } else {
         Swal.fire(
           'Good job!',
-          `Test saved successfully and Your score is ${score}`,
-          'success'
+          `Your score is ${score}`,
+          'success',
         )
+        // navigate(`/view/attempt`, {state : {user_answers : data.user_answers, quizId: data.quiz}})
       }
     })
-    
   }
 
 

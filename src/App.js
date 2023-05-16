@@ -32,8 +32,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/HOME" element={<LandingPage />} />
-          <Route exact path="/QUIZ PORTAL" element={<HomePage />} />
+          <Route exact path="/quiz_portal" element={<HomePage />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/user/dashboard" element={<UserDashboard />} />
@@ -82,9 +81,6 @@ function App() {
           <Route exact path="/main/guides/:year/:type" element={<Guides />} />
         </Routes>
       </Router>
-      <div className="main-footer">
-        <Footer />
-      </div>
     </>
   );
 }

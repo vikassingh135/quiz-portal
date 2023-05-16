@@ -68,100 +68,101 @@ const LandingPage = () => {
           src="https://helpwevegotkids.com/wp-content/uploads/2020/06/educational-online-camps-summer-2020-1200x500-1.jpg"
         ></img>
       </Box>
-      <div className="we-provide">
-        <h2>We Provide</h2>
-      </div>
-      <div className="we-provide-items">
-        <div>
-          <h3>HandWritten Notes</h3>
+      <div id="study_materials">
+        <div className="we-provide">
+          <h2>We Provide</h2>
         </div>
-        <div>
-          <h3>Books/Guides</h3>
+        <div className="we-provide-items">
+          <div>
+            <h3>HandWritten Notes</h3>
+          </div>
+          <div>
+            <h3>Books/Guides</h3>
+          </div>
+          <div>
+            <h3>Previous Year Questions</h3>
+          </div>
         </div>
-        <div>
-          <h3>Previous Year Questions</h3>
+
+        <div className="we-provide">
+          <h2>Handwritten Notes for B.Tech.</h2>
+        </div>
+        <div className="we-provide-items">
+          <a href="/main/guides/1st/notes">
+            <div>
+              <h3>B.Tech 1st year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/2nd/notes">
+            <div>
+              <h3>B.Tech 2nd year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/3rd/notes">
+            <div>
+              <h3>B.Tech 3rd year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/4th/notes">
+            <div>
+              <h3>B.Tech 4th year </h3>
+            </div>
+          </a>
+        </div>
+
+        <div className="we-provide">
+          <h2>Books/Guides for B.Tech.</h2>
+        </div>
+        <div className="we-provide-items">
+          <a href="/main/guides/1st/books">
+            <div>
+              <h3>B.Tech 1st year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/2nd/books">
+            <div>
+              <h3>B.Tech 2nd year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/4rd/books">
+            <div>
+              <h3>B.Tech 3rd year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/4th/books">
+            <div>
+              <h3>B.Tech 4th year </h3>
+            </div>
+          </a>
+        </div>
+
+        <div className="we-provide">
+          <h2>Previous Year Questions</h2>
+        </div>
+        <div className="we-provide-items">
+          <a href="/main/guides/1st/pyq">
+            <div>
+              <h3>B.Tech 1st year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/2nd/pyq">
+            <div>
+              <h3>B.Tech 2nd year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/3rd/pyq">
+            <div>
+              <h3>B.Tech 3rd year </h3>
+            </div>
+          </a>
+          <a href="/main/guides/4th/pyq">
+            <div>
+              <h3>B.Tech 4th year </h3>
+            </div>
+          </a>
         </div>
       </div>
-
-      <div className="we-provide">
-        <h2>Handwritten Notes for B.Tech.</h2>
-      </div>
-      <div className="we-provide-items">
-        <a href="/main/guides/1st/notes">
-          <div>
-            <h3>B.Tech 1st year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/2nd/notes">
-          <div>
-            <h3>B.Tech 2nd year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/3rd/notes">
-          <div>
-            <h3>B.Tech 3rd year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/4th/notes">
-          <div>
-            <h3>B.Tech 4th year </h3>
-          </div>
-        </a>
-      </div>
-
-      <div className="we-provide">
-        <h2>Books/Guides for B.Tech.</h2>
-      </div>
-      <div className="we-provide-items">
-        <a href="/main/guides/1st/books">
-          <div>
-            <h3>B.Tech 1st year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/2nd/books">
-          <div>
-            <h3>B.Tech 2nd year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/4rd/books">
-          <div>
-            <h3>B.Tech 3rd year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/4th/books">
-          <div>
-            <h3>B.Tech 4th year </h3>
-          </div>
-        </a>
-      </div>
-
-      <div className="we-provide">
-        <h2>Previous Year Questions</h2>
-      </div>
-      <div className="we-provide-items">
-      <a href="/main/guides/1st/pyq">
-          <div>
-            <h3>B.Tech 1st year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/2nd/pyq">
-          <div>
-            <h3>B.Tech 2nd year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/3rd/pyq">
-          <div>
-            <h3>B.Tech 3rd year </h3>
-          </div>
-        </a>
-        <a href="/main/guides/4th/pyq">
-          <div>
-            <h3>B.Tech 4th year </h3>
-          </div>
-        </a>
-      </div>
-
-      <div className="main-contact-us">
+      <div className="main-contact-us" id="contact_us">
         <form>
           <Typography variant="h2" sx={{ fontWeight: "bold" }}>
             Contact Us Form
@@ -295,6 +296,7 @@ const LandingPage = () => {
           </Button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };
