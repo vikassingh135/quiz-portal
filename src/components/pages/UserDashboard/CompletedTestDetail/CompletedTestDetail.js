@@ -3,13 +3,13 @@ import NavbarUser from '../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/Na
 import { useLocation, useParams } from 'react-router-dom'
 import { getQuizById, showQuestions } from '../../../apis/admin/adminApi';
 import { PrintCompletedTestDetails } from '../../../templates/PrintTableUser/PrintTableUser';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const CompletedTestDetail = () => {
 
   const {state} = useLocation();  
 
-  console.log(state.quizId, state.user_answers);
+  // console.log(state.quizId, state.user_answers);
   
   const [questions, setQuestions] = useState([]);
 
@@ -35,15 +35,23 @@ const CompletedTestDetail = () => {
 
 //   const questions = quiz["questions"];
 
-  console.log(questions, user_answers);
+  console.log(state);
 
   return (
     <div>
         <NavbarUser/>
         <div>
             <Typography variant='h2' sx={{m:2}}>Quiz Result !!</Typography>
-            <Typography>Number of Questions : </Typography>    
-            <PrintCompletedTestDetails questions = {questions} user_answers = {user_answers} />
+            <Typography variant='h4' sx={{mt:5}} textAlign={'center'}>Title: {state.title}</Typography>
+            <Box margin={'20px'} padding={'20px'} display={'flex'} justifyContent={'space-between'}>
+            <Typography fontSize={'22px'}>Number of Questions: {questions.length}</Typography> 
+            <Typography fontSize={'22px'}>Attempt Date: {state.date}</Typography>  
+            </Box>
+            <Box margin={'-20px 20px 20px 20px'} padding={'0px 20px 20px 20px'} display={'flex'} justifyContent={'space-between'}>
+            <Typography fontSize={'22px'}>Max Marks: {questions.length*2}</Typography>  
+            <Typography fontSize={'22px'}>Obtained Marks: {state.score*2}</Typography>     
+            </Box>  
+            <PrintCompletedTestDetails questions = {questions} user_answers = {user_answers}/>
         </div>
     </div>
   )

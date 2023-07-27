@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavbarUser from "../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/NavbarUser";
 import { viewCompletedTest } from "../../../apis/admin/adminApi";
 import { PrintCompletedTest } from "../../../templates/PrintTableUser/PrintTableUser";
+import { Box } from "@mui/material";
 
 const CompletedTest = () => {
   const [tests, setTests] = useState([]);
@@ -24,7 +25,9 @@ const CompletedTest = () => {
   return (
     <div>
       <NavbarUser />
+      <Box margin={'30px 40px'} display={'flex'} gap={'30px'}>
       <PrintCompletedTest tests={tests} />
+      </Box>
     </div>
   );
 };

@@ -378,17 +378,17 @@ const PrintQuestions = (props) => {
 
 const PrintCompletedTest = (props) => {
   console.log(props.tests);
-
+  // alert("hello");
   const navigate = useNavigate();
 
   const onviewClick = (data)=> {
-    navigate(`/view/attempt`, {state : {user_answers :data.user_answers, quizId: data.quiz}})
+    navigate(`/view/attempt`, {state : {user_answers :data.user_answers, quizId: data.quiz, score: data.score, date: data.createdAt, title: data.title}})
   }
 
   return (
     <>
       {props.tests.map((test) => {
-        const { _id, quiz, user_answers } = test;
+        const { _id, quiz, user_answers, score, createdAt, title } = test;
 
         {
           return (
@@ -401,16 +401,19 @@ const PrintCompletedTest = (props) => {
                 Quiz Id : {quiz}
               </Typography>
               <Typography variant="h5" component="div">
-                Completed Quiz 
+                Title: {title}
+              </Typography>
+              <Typography sx={{ mt: 1.5 }} color="text.secondary">
+                Completed At: {createdAt}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                adjective
+                Score: {score*2}
               </Typography>
               <Button
                   // color="success"
                   sx={{ ml: "5%", fontSize: 16 }}
                   startIcon={<RemoveRedEyeSharpIcon />}
-                  onClick={() => onviewClick({quiz,user_answers})}
+                  onClick={() => onviewClick({quiz,user_answers,score,createdAt, title})}
                 >
                   View
                 </Button>
@@ -439,7 +442,7 @@ const PrintCompletedTestDetails = ({questions, user_answers}) => {
   return (
     <>
       {questions.map((currQuestion, i) => {
-        i++;
+        // i++;
         const {
           _id,
           content,
@@ -461,7 +464,7 @@ const PrintCompletedTestDetails = ({questions, user_answers}) => {
                 id="nested-list-subheader"
                 variant="h5"
               >
-                {i}. {content}
+                {i+1}. {content}
               </Typography>
             }
           >

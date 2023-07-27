@@ -90,14 +90,33 @@ const QuizOnGoing = () => {
 
     score = (calculatedScore(selectedValue,questions));
     console.log(score, JSON.parse(localStorage.getItem("jwt")).user._id);
-    saveCompletedTest({user: JSON.parse(localStorage.getItem("jwt")).user._id, quiz: state.quizId, user_answers: selectedValue}).then((data) => {
-      if(data.error) {
-        alert(data.error);
-      } else {
-        Swal.fire(
-          'Good job!',
-          `Your score is ${score}`,
-          'success',
+    // saveCompletedTest({user: JSON.parse(localStorage.getItem("jwt")).user._id, quiz: state.quizId, user_answers: selectedValue, score}).then((data) => {
+    //   if(data.error) {
+    //     alert(data.error);
+    //   } else {
+        // Swal.fire(
+        //   'Good job!',
+        //   `Your score is ${score}`,
+        //   'success',
+        // )
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Submit!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            saveCompletedTest({user: JSON.parse(localStorage.getItem("jwt")).user._id, quiz: state.quizId, user_answers: selectedValue, score, title: state.title}).then((data) => {
+              if(data.error) {
+                alert(data.error);
+              } else {
+                navigate(`/view/attempt`, {state : {user_answers : data.user_answers, quizId: data.quiz, score: data.score, date: data.createdAt, title: data.title}})
+              }
+          }
+        // }
         )
         // navigate(`/view/attempt`, {state : {user_answers : data.user_answers, quizId: data.quiz}})
       }
@@ -109,9 +128,14 @@ const QuizOnGoing = () => {
   return (
     <div>
       <NavbarUser />
-      <Typography variant="h2" sx={{ mt: 5 }}>
+      <Typography variant="h3" sx={{ mt: 5 }} textAlign={'center'}>
+        Title: {state.title}
+      </Typography>
+
+      <Typography variant="h4" sx={{ mt: 5 }} textAlign={'center'}>
         Questions
       </Typography>
+
       <CircleTimer time = {questions.length*2} handleSubmit = {handleSubmit}/>
       <Typography variant="h6" sx={{ mt: 5, mb: 4, ml: 30 }}>
         Please read Questions carefully before answering them : -

@@ -22,14 +22,17 @@ const AttemptQuiz = () => {
         }
         
         setQuiz(data);
-        // console.log(quiz);
+        // console.log(data,quiz);
+        
     })
   },[])
+
+  console.log(quiz);
 
   let navigate = useNavigate();
 
   const routeChange = ()  => {
-        navigate('/user/quizOnGoing', {state: {quizId: quizId}});
+        navigate('/user/quizOnGoing', {state: {quizId: quizId, title: quiz.title}});
   }
    
     

@@ -105,12 +105,13 @@ function MainWebsiteNavbar(props) {
             >
               Quiz Portal
             </Button>
+            <a href="http://localhost:8000">
             <Button
               sx={{ color: "#fff", fontSize: "18px" }}
-              onClick={() => navigae(`/`)}
             >
               Job Portal
             </Button>
+            </a>
             <a href="#contact_us">
             <Button
               sx={{ color: "#fff", fontSize: "18px" }}
