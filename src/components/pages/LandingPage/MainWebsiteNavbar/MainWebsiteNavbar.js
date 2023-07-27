@@ -39,7 +39,7 @@ function MainWebsiteNavbar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        QvCarrier
+        <img src="../qvCarieer.jpg"/>
       </Typography>
       <Divider />
       <List>
