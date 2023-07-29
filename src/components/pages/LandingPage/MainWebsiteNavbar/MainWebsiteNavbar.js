@@ -76,7 +76,7 @@ function MainWebsiteNavbar(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            QvCarrier
+            <img src={require('./qvCarieer3.jpg')} style={{borderRadius:"50%", marginTop:"10px"}} alt="logo" width={70} />
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Button

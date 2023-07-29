@@ -29,5 +29,6 @@
   }
 
   .nav-links a button{
-    background-color: orangered;
+    background-color: #1976d2;
+    color: white !important;
   }

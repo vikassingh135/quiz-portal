@@ -392,7 +392,7 @@ const PrintCompletedTest = (props) => {
 
         {
           return (
-            <CardContent>
+            <CardContent style={{border:"1px solid #bacdd8", borderRadius:"20px"}}>
               <Typography
                 sx={{ fontSize: 14 }}
                 color="text.secondary"

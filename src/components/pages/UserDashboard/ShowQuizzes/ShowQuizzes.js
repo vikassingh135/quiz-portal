@@ -21,6 +21,7 @@ const ShowQuizzes = () => {
   return (
     <div>
       <NavbarUser/>
+      <h2 style={{marginTop:"20px"}}>All Quizzes</h2>
       <div className="category-table-div">
       
 {/*         

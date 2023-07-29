@@ -25,7 +25,8 @@ const CompletedTest = () => {
   return (
     <div>
       <NavbarUser />
-      <Box margin={'30px 40px'} display={'flex'} gap={'30px'}>
+      <h2 style={{marginTop:"20px"}}>Completed Tests</h2>
+      <Box margin={'30px 40px'} display={'flex'} gap={'50px 50px'} flexWrap={'wrap'} justifyContent={'center'} >
       <PrintCompletedTest tests={tests} />
       </Box>
     </div>
