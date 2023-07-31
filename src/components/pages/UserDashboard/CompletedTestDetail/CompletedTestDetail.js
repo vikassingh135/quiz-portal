@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom'
 import { getQuizById, showQuestions } from '../../../apis/admin/adminApi';
 import { PrintCompletedTestDetails } from '../../../templates/PrintTableUser/PrintTableUser';
 import { Box, Typography } from '@mui/material';
+import { isAuthenticated } from '../../../auth';
 
 const CompletedTestDetail = () => {
 
@@ -15,16 +16,18 @@ const CompletedTestDetail = () => {
 
   const [quiz, setQuiz] = useState();
 
+  const {token} = isAuthenticated();
+
   const user_answers = state.user_answers;
 
   useEffect(()=> {
-     showQuestions(state.quizId).then(data => {
+     showQuestions(state.quizId, token).then(data => {
         if(data.error) {
             console.error(data.error);
         } else setQuestions(data);
         console.log(data, questions);
      })
-     getQuizById(state.quizId).then(data => {
+     getQuizById(state.quizId, token).then(data => {
         if(data.error) {
             console.error(data.error);
         } else setQuiz(data)

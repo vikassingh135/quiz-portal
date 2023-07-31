@@ -15,6 +15,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
 import { saveStudyMaterial } from "../../../../apis/admin/adminApi";
+import Swal from "sweetalert2";
+import { isAuthenticated } from "../../../../auth";
 
 const Books = () => {
   const [values, setValues] = useState({
@@ -26,6 +28,8 @@ const Books = () => {
     link: "",
   });
 
+  const {token} = isAuthenticated();
+
   const { title, description, content_type, year, branch, link } =  values ;
 
   const handleChange = (name) => (event) => {
@@ -35,13 +39,16 @@ const Books = () => {
   
   const handleSubmit  = (event) => {
         event.preventDefault();
-        saveStudyMaterial(values).then(response => {
+        saveStudyMaterial(values, token).then(response => {
             if(response.error) {
                 console.error(response.error);
                 alert("Error");
             } else {
-                console.log(response);
-                alert("saved successfully");
+              Swal.fire(
+                'Congrats!',
+                'Study Material Added Successfully',
+                'success'
+              )
             }
         })
   }
@@ -112,7 +119,7 @@ const Books = () => {
                 sx={{ width: 300 }}
                 defaultValue="other"
                 label="Semester"
-                onChange={handleChange("semester")}
+                onChange={handleChange("year")}
                 value={year}
               >
                 <MenuItem value="1st">1st Year</MenuItem>

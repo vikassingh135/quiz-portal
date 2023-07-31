@@ -7,12 +7,15 @@ import { Link } from 'react-router-dom';
 import AddQuiz from '../AddQuiz/AddQuiz';
 import { Button, Typography } from '@mui/material';
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
+import { isAuthenticated } from '../../../auth';
 const ShowQuiz = () => {
 
   const [quizzes, setQuizzes] = useState([]) ; 
 
+  const {token} = isAuthenticated();
+
   useEffect(()=>{
-    showQuizzes().then(data => {
+    showQuizzes(token).then(data => {
         if(data.error) {
             console.error(data.error);
         }

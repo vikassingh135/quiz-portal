@@ -1,11 +1,12 @@
 import { API } from "../../../config";
 
-export const addCategory = (category) => {
+export const addCategory = (token, category) => {
     return fetch(`${API}/category/create`, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(category)
     }).then(response => {
@@ -15,9 +16,30 @@ export const addCategory = (category) => {
     })
 }
 
-export const getCategories = () => {
+export const getCategories = (token) => {
     return fetch(`${API}/category/categories`, {
         method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.error(err);
+    })
+}
+
+
+export const getContactUs = (token) => {
+    return fetch(`${API}/contactUs/getContactUs`, {
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
     }).then(response => {
         return response.json();
     }).catch(err => {
@@ -35,9 +57,14 @@ export const getCategoryById = (id) => {
     })
 }
 
-export const getQuizById = (id) => {
+export const getQuizById = (id, token) => {
     return fetch(`${API}/quiz/get/${id}`, {
         method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
     }).then(response => {
         return response.json();
     }).catch(err => {
@@ -45,9 +72,14 @@ export const getQuizById = (id) => {
     })
 }
 
-export const getQuizByCategoryId = (categoryId) => {
+export const getQuizByCategoryId = (categoryId, token) => {
     return fetch(`${API}/quiz/byCategory/${categoryId}`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
     }).then(response => {
         return response.json();
     }).catch(err => {
@@ -55,12 +87,13 @@ export const getQuizByCategoryId = (categoryId) => {
     })
 }
 
-export const addQuiz = (quiz) => {
+export const addQuiz = (quiz, token) => {
     return fetch(`${API}/quiz/create`, {
         method:'POST',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(quiz)
     }).then(response => {
@@ -70,9 +103,14 @@ export const addQuiz = (quiz) => {
     })
 }
 
-export const showQuizzes = () => {
+export const showQuizzes = (token) => {
     return fetch(`${API}/quiz/showQuizzes`, {
         method:'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
     }).then(response => {
         return response.json();
     }).catch(err => {
@@ -80,9 +118,14 @@ export const showQuizzes = () => {
     })
 }
 
-export const showQuestions = (quizId) => {
+export const showQuestions = (quizId, token) => {
     return fetch(`${API}/question/byQuiz/${quizId}`, {
         method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
     }).then(response => {
         return response.json();
     }).catch(err => {
@@ -90,12 +133,13 @@ export const showQuestions = (quizId) => {
     })
 }
 
-export const addQuestion = (question) => {
+export const addQuestion = (question, token) => {
     return fetch(`${API}/question/create`, {
         method:'POST',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(question)
     }).then(response => {
@@ -126,12 +170,13 @@ export const deleteQuestionById = (questionId) => {
 }
 
 
-export const saveCompletedTest = (data) => {
+export const saveCompletedTest = (token, data) => {
     return fetch(`${API}/completedTest/save`, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(data)
     }).then(response => {
@@ -141,9 +186,14 @@ export const saveCompletedTest = (data) => {
     })
 }
 
-export const viewCompletedTest= (userId) => {
+export const viewCompletedTest= (token, userId) => {
     return fetch(`${API}/completedTest/view/${userId}`, {
         method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
     }).then(response => {
         return response.json();
     }).catch(error => {
@@ -151,12 +201,13 @@ export const viewCompletedTest= (userId) => {
     })
 }
 
-export const saveStudyMaterial = (data) => {
+export const saveStudyMaterial = (data, token) => {
     return fetch(`${API}/studyMaterials/save`, {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(data)
     }).then(response => {
@@ -195,3 +246,20 @@ export const getStudyMaterialsBytype = ({year,type}) => {
         console.error(err);
     })
 }
+
+export const contactUsPost = (contactUs) => {
+    return fetch(`${API}/contactUs/create`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(contactUs),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };

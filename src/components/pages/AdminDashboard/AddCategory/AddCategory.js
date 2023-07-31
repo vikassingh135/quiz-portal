@@ -12,12 +12,16 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 import { Icon, Typography } from "@mui/material";
+import Swal from "sweetalert2";
+import { isAuthenticated } from "../../../auth";
 
 const AddCategory = () => {
   const [values, setValues] = useState({
     title: "",
     description: "",
   });
+
+  const {token} = isAuthenticated();
 
   const [open, setOpen] = useState(false);
 
@@ -37,11 +41,15 @@ const AddCategory = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addCategory({ title, description }).then((data) => {
+    addCategory(token, { title, description }).then((data) => {
       if (data.error) {
         alert("Error");
       } else {
-        alert("Congrats!! Category Added Successfully");
+        Swal.fire(
+          'Success!',
+          'Congrats!! Category Added Successfully',
+          'success'
+        )
         console.log(data);
       }
       handleClose();
@@ -51,7 +59,7 @@ const AddCategory = () => {
   const [categories, setCategories] = useState([]);
 
   const loadCategory = () => {
-    getCategories().then((data) => {
+    getCategories(token).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {

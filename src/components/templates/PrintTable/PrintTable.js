@@ -119,6 +119,74 @@ const PrintTable = ({ categories }) => {
   );
 };
 
+
+const PrintContactUs = ({ contactUs }) => {
+
+  const navigate = useNavigate();
+
+  const onDeleteClick = (categoryId) => {
+    deleteCategoryById(categoryId).then((data) => {
+      console.log(data);
+      if (data.error) {
+        Swal.fire(data.error);
+      } else Swal.fire("Category Deleted Successfully");
+    });
+  };
+
+  return (
+    <>
+      {contactUs.map((data) => {
+        const { _id, name, phone, email, description, url } = data;
+
+        return (
+          <div>
+            <Card sx={{ margin: 3}}>
+              <CardMedia
+                sx={{ height: 150, width: 320 }}
+                image="https://wallpapercave.com/wp/wp7250087.jpg"
+                title="Quiz Image"
+              />
+              <CardContent style={{color: "#000"}}>
+                <Typography gutterBottom variant="h5" component="div">
+                  <b>Dscription</b>: {description}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  User Name: {name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  User Phone: {phone}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  User Email: {email}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Attachment URL: <a href={url}>Click Here</a>
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <ButtonGroup
+                  variant="contained"
+                  aria-label="outlined primary button group"
+                >
+                  <Button
+                    variant="contained"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => onDeleteClick(_id)}
+                  >
+                    Delete
+                  </Button>
+                </ButtonGroup>
+              </CardActions>
+            </Card>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+
 const PrintQuizTable = ({ quizzes }) => {
   const navigate = useNavigate();
 
@@ -372,4 +440,5 @@ export {
   PrintQuizTableUser,
   PrintQuestionTable,
   PrintQuestionTableUser,
+  PrintContactUs
 };

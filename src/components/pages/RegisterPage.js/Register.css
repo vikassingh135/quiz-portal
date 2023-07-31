@@ -18,10 +18,8 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center; */
-
-     
   }
-  
+
   .register h2,
   .login h2 {
     font-size: 40px;
@@ -47,7 +45,7 @@
   }
   
   input {
-    background-color:  rgb(191, 255, 0);;
+    background-color:  rgba(9, 135, 231, 0.751);
     width: 300px;
     /* border: 10px solid red; */
     /* width: 150%; */

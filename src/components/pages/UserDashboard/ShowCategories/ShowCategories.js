@@ -5,14 +5,17 @@ import {PrintTable}  from "../../../templates/PrintTableUser/PrintTableUser";
 import "./ShowCategories.css";
 import NavbarUser from "../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/NavbarUser";
 import { Typography } from "@mui/material";
+import { isAuthenticated } from "../../../auth";
 
 const ShowCategories = () => {
   
  
   const [categories, setCategories] = useState([]);
 
+  const {token} = isAuthenticated();
+
   const loadCategory = () => {
-    getCategories().then((data) => {
+    getCategories(token).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -21,6 +24,7 @@ const ShowCategories = () => {
       }
     });
   };
+
 
   useEffect(() => {
     loadCategory();

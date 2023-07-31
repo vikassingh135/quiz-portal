@@ -78,7 +78,7 @@ function MainWebsiteNavbar(props) {
           >
             <img src={require('./qvCarieer3.jpg')} style={{borderRadius:"50%", marginTop:"10px"}} alt="logo" width={70} />
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box sx={{ display: { xs: "none", sm: "block" }, textDecoration:"Capatilize" }}>
             <Button
               sx={{ color: "#fff", fontSize: "18px" }}
               onClick={() => navigae(`/`)}

@@ -7,6 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AddQuiz from '../AddQuiz/AddQuiz';
 import { Button, Typography } from '@mui/material';
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
+import { isAuthenticated } from '../../../auth';
 
 const QuizByCategory = () => {
 
@@ -14,9 +15,11 @@ const QuizByCategory = () => {
 
   const [quizzes, setQuizzes] = useState([]) ; 
 
+  const {token} = isAuthenticated();
+
   useEffect(()=>{
     console.log(state);
-    getQuizByCategoryId(state.categoryId).then(data => {
+    getQuizByCategoryId(state.categoryId, token).then(data => {
         if(data.error) {
             console.error(data.error);
         }

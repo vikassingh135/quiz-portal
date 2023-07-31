@@ -3,12 +3,15 @@ import NavbarUser from "../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/Na
 import { viewCompletedTest } from "../../../apis/admin/adminApi";
 import { PrintCompletedTest } from "../../../templates/PrintTableUser/PrintTableUser";
 import { Box } from "@mui/material";
+import { isAuthenticated } from "../../../auth";
 
 const CompletedTest = () => {
   const [tests, setTests] = useState([]);
 
+  const {token} = isAuthenticated();
+
   useEffect(() => {
-    viewCompletedTest(JSON.parse(localStorage.getItem("jwt")).user._id).then(data => {
+    viewCompletedTest(token, JSON.parse(localStorage.getItem("jwt")).user._id).then(data => {
         if(data.error) {
             console.error(data.error);
         } else {

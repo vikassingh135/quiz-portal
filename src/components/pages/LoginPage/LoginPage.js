@@ -93,8 +93,7 @@ const LoginPage = () => {
             <button onClick={clickSubmit}>Submit</button>
           </div>
           <div class="fotter">
-            <a>Forgot Password ?</a>
-            <a>SingUp</a>
+            <a href="./register" style={{color:"#00ccff", marginLeft:"20px"}}>Not Registered Yet? Register Here</a>
           </div>
         </div>
       </div>

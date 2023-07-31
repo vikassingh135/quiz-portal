@@ -25,6 +25,8 @@ import HandWrittenNotes from "./components/pages/AdminDashboard/PYQSection/HandW
 import Books from "./components/pages/AdminDashboard/PYQSection/Books/Books";
 import PYQ from "./components/pages/AdminDashboard/PYQSection/PYQ/PYQ";
 import Footer from "./components/pages/LandingPage/Footer/Footer";
+import UserProfile from "./components/pages/UserDashboard/UserProfile/UserProfile";
+import ContactUs from "./components/pages/AdminDashboard/ContactUs/ContactUs";
 
 function App() {
   return (
@@ -75,10 +77,16 @@ function App() {
             path="/view/attempt/"
             element={<CompletedTestDetail />}
           />
+          <Route
+            exact
+            path="/view/contactUs/"
+            element={<ContactUs />}
+          />
           <Route exact path="/admin/notes/" element={<HandWrittenNotes />} />
           <Route exact path="/admin/books/" element={<Books />} />
           <Route exact path="/admin/pyq/" element={<PYQ />} />
           <Route exact path="/main/guides/:year/:type" element={<Guides />} />
+          <Route exact path="/profile" element={<UserProfile />} />
         </Routes>
       </Router>
     </>

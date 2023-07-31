@@ -35,7 +35,7 @@ const NavbarUser = () => {
      
       <div class="nav-links">
         <a href="/user/dashboard"><HomeIcon sx={{ fontSize: 40, color:"white" }} /></a>
-        <a href="/user/dashboard"><AccountCircleIcon sx={{fontSize:40, color:"white"}}/></a>
+        <a href="/profile"><AccountCircleIcon sx={{fontSize:40, color:"white"}}/></a>
         {/* <a href="/">Logout</a> */}
         <Button onClick={handleLogOut}><ExitToAppIcon sx={{fontSize:40, color:"white"}}/></Button>
       </div>

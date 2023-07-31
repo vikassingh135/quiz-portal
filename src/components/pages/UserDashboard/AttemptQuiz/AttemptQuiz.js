@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import NavbarUser from '../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/NavbarUser'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getQuizById } from '../../../apis/admin/adminApi';
-import ShowQuiz from '../../AdminDashboard/ShowQuiz/ShowQuiz';
-import ShowQuizzes from '../ShowQuizzes/ShowQuizzes';
 import {Box, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import StartIcon from '@mui/icons-material/Start';
+import { isAuthenticated } from '../../../auth';
 
 const AttemptQuiz = () => {
 
@@ -14,9 +13,11 @@ const AttemptQuiz = () => {
 
   const [quiz,setQuiz] = useState({});
   
+  const {token} = isAuthenticated();
+
   useEffect(()=>{
     // console.log(quizId);
-    getQuizById(quizId).then(data => {
+    getQuizById(quizId, token).then(data => {
         if(data.error) {
             console.error(data.erroe);
         }

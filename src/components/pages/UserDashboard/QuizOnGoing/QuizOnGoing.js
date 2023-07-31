@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./QuizOnGoing.css";
 import { addQuestion, saveCompletedTest, showQuestions } from "../../../apis/admin/adminApi";
 import NavbarAdmin from "../../../templates/UsersNavbar/NavBarAdmin/NavbarAdmin/NavbarAdmin";
 import { PrintQuestionTableUser } from "../../../templates/PrintTable/PrintTable";
@@ -15,6 +14,7 @@ import { Typography, Box, Button } from "@mui/material";
 import { PrintQuestions } from "../../../templates/PrintTableUser/PrintTableUser";
 import Swal from "sweetalert2";
 import CircleTimer from "../Timer/CircleTimer";
+import { isAuthenticated } from "../../../auth";
 
 
 
@@ -45,9 +45,11 @@ const QuizOnGoing = () => {
 
   const [questions, setQuestions] = useState([]);
 
+  const {token} = isAuthenticated();
+
   useEffect(() => {
     console.log(state.quizId);
-    showQuestions(state.quizId).then((data) => {
+    showQuestions(state.quizId, token).then((data) => {
       if (data.error) {
         console.error(data.error);
       } else {
@@ -109,7 +111,7 @@ const QuizOnGoing = () => {
           confirmButtonText: 'Yes, Submit!'
         }).then((result) => {
           if (result.isConfirmed) {
-            saveCompletedTest({user: JSON.parse(localStorage.getItem("jwt")).user._id, quiz: state.quizId, user_answers: selectedValue, score, title: state.title}).then((data) => {
+            saveCompletedTest(token, {user: JSON.parse(localStorage.getItem("jwt")).user._id, quiz: state.quizId, user_answers: selectedValue, score, title: state.title}).then((data) => {
               if(data.error) {
                 alert(data.error);
               } else {

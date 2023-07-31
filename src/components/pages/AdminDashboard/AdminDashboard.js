@@ -14,6 +14,7 @@ const AdminDashboard = () => {
       <Link to='/admin/Categories'> <button>Categories Page</button></Link>
       <Link to='/admin/addQuiz'><button>Create Quiz</button></Link>
       <Link to='/admin/showQuizzes'><button>Show Quizzes</button></Link>
+      <Link to='/view/contactUs'><button>Contact Us Forms</button></Link>
       </div>
 
       <h1>Study Materials Services</h1>

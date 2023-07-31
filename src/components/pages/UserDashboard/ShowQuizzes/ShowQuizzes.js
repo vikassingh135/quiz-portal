@@ -4,13 +4,16 @@ import { showQuizzes } from '../../../apis/admin/adminApi';
 import {PrintQuizTableUser} from '../../../templates/PrintTable/PrintTable';
 import { Link } from 'react-router-dom';
 import NavbarUser from '../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/NavbarUser';
+import { isAuthenticated } from '../../../auth';
 
 const ShowQuizzes = () => {
 
   const [quizzes, setQuizzes] = useState([]) ; 
 
+  const {token} = isAuthenticated();
+
   useEffect(()=>{
-    showQuizzes().then(data => {
+    showQuizzes(token).then(data => {
         if(data.error) {
             console.error(data.error);
         }

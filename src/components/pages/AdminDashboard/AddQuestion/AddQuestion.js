@@ -11,6 +11,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Swal from "sweetalert2";
+import { isAuthenticated } from "../../../auth";
 
 
 const AddQuestion = () => {
@@ -23,6 +24,8 @@ const AddQuestion = () => {
   const [questions, setQuestions] = useState([]);
 
   const {quizId} = useParams();
+
+  const {token} = isAuthenticated();
 
   const [newQuestion, setNewQuestion] = useState({
     content: "",
@@ -38,12 +41,12 @@ const AddQuestion = () => {
     newQuestion;
 
   const handleChange = (name) => (event) => {
-    setNewQuestion({ ...newQuestion, [name]: event.target.value });
+    setNewQuestion({ ...newQuestion, [name]: event.target.value }, token);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addQuestion(newQuestion).then((data) => {
+    addQuestion(newQuestion, token).then((data) => {
         if(data.error) {
             Swal.fire("Error: Check Again");
         } else {
@@ -53,7 +56,7 @@ const AddQuestion = () => {
   }
 
   useEffect(() => {
-    showQuestions(quizId).then((data) => {
+    showQuestions(quizId, token).then((data) => {
       if (data.error) {
         console.error(data.error);
       }

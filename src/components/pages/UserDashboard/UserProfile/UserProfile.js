@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-import Navbar from "../../templates/navbar/Navbar";
-import "./Register.css";
-import { signup } from "../../auth";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import {
@@ -19,8 +16,10 @@ import { AccountCircle } from "@mui/icons-material";
 import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import NavbarAdmin from "../../../templates/UsersNavbar/NavBarAdmin/NavbarUser/NavbarUser";
+import { isAuthenticated, updateProfile } from "../../../auth";
 
-const Register = () => {
+const UpdateProfile = () => {
   const [values, setValues] = useState({
     name: "",
     phone: "",
@@ -36,32 +35,31 @@ const Register = () => {
     setValues({ ...values, [name]: event.target.value });
   };
 
+  const {user} = isAuthenticated();
+
+  useEffect(()=>{
+    if(user) {
+        setValues({...values, ...user});
+    }
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values });
-    signup({ name, phone, email, city, password }).then((data) => {
+    updateProfile({ name, phone, email, city, password }, user._id).then((data) => {
       if (data.error) {
         alert("Error: Please Check Input Fields");
       } else {
-        alert("Congrats!! You had successfully Registered");
-        setValues({
-          ...values,
-          name: "",
-          phone: "",
-          email: "",
-          city: "",
-          password: "",
-          confirm_password: "",
-        });
+        alert("Profile Updated Successfully!!");
       }
     });
   };
 
   return (
-    <div class="register-page">
-      <Navbar />
+    <div class="">
+      <NavbarAdmin />
       <Typography variant="h2" sx={{ fontWeight: 600, color: "#00b0ff" }}>
-        Registration Form
+        Update Profile
       </Typography>
       <div className="add-quiz-div">
         <form>
@@ -70,7 +68,7 @@ const Register = () => {
               display: "flex",
               alignItems: "flex-end",
               p: 0.5,
-              backgroundColor: "#fff",
+              backgroundColor: "#b2ff59",
               borderRadius: 3,
             }}
           >
@@ -89,7 +87,7 @@ const Register = () => {
               display: "flex",
               alignItems: "flex-end",
               p: 0.5,
-              backgroundColor: "#fff",
+              backgroundColor: "#b2ff59",
               borderRadius: 3,
             }}
           >
@@ -110,7 +108,7 @@ const Register = () => {
 
               alignItems: "flex-end",
               p: 0.5,
-              backgroundColor: "#fff",
+              backgroundColor: "#b2ff59",
               borderRadius: 3,
             }}
           >
@@ -139,7 +137,7 @@ const Register = () => {
               display: "flex",
               alignItems: "flex-end",
               p: 0.5,
-              backgroundColor: "#fff",
+              backgroundColor: "#b2ff59",
               borderRadius: 3,
             }}
           >
@@ -167,14 +165,14 @@ const Register = () => {
               display: "flex",
               alignItems: "flex-end",
               p: 0.5,
-              backgroundColor: "#fff",
+              backgroundColor: "#b2ff59",
               borderRadius: 3,
             }}
           >
             <LockOpenIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
               id="input-with-sx"
-              label="Password"
+              label="New Password"
               variant="standard"
               fullWidth
               type="password"
@@ -196,7 +194,7 @@ const Register = () => {
               display: "flex",
               alignItems: "flex-end",
               p: 0.5,
-              backgroundColor: "#fff",
+              backgroundColor: "#b2ff59",
               borderRadius: 3,
             }}
           >
@@ -214,9 +212,9 @@ const Register = () => {
           <Button
             variant="contained"
             onClick={handleSubmit}
-            sx={{ fontSize: "18px", backgroundCcolor: "#1976d2", borderRadius:"3" }}
+            sx={{ fontSize: "18px", backgroundCcolor: "#00b0ff" }}
           >
-            Register
+            Update Profile
           </Button>
         </form>
       </div>
@@ -224,4 +222,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default UpdateProfile;

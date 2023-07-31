@@ -7,6 +7,7 @@ import { TextField, Typography, Button, Switch } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { isAuthenticated } from "../../../auth";
 
 const AddQuiz = () => {
   const [categories, setCategories] = useState([]);
@@ -21,6 +22,8 @@ const AddQuiz = () => {
     category: "",
     active: true
   });
+
+  const {token} = isAuthenticated();
 
   const { title, description, maxMarks, numberOfQuestions, category, active } =
     quizValues;
@@ -37,7 +40,7 @@ const AddQuiz = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(quizValues);
-    addQuiz(quizValues).then((data) => {
+    addQuiz(quizValues, token).then((data) => {
       if (data.error) {
         Swal.fire({
           icon: "error",
@@ -58,7 +61,7 @@ const AddQuiz = () => {
   };
 
   const loadCategory = () => {
-    getCategories().then((data) => {
+    getCategories(token).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {

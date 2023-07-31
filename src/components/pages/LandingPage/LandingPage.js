@@ -1,7 +1,7 @@
 import MainWebsiteNavbar from "./MainWebsiteNavbar/MainWebsiteNavbar";
 import "./LandingPage.css";
 import React, { useState } from "react";
-import { signup } from "../../auth";
+
 import Swal from "sweetalert2";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import {
@@ -21,18 +21,20 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Footer from "./Footer/Footer";
 import { Link } from "react-router-dom";
+import InfoIcon from '@mui/icons-material/Info';
+import InsertLinkIcon from '@mui/icons-material/InsertLink';
+import { contactUsPost } from "../../apis/admin/adminApi";
 
 const LandingPage = () => {
   const [values, setValues] = useState({
     name: "",
     phone: "",
     email: "",
-    city: "",
-    password: "",
-    confirm_password: "",
+    description: "",
+    url: ""
   });
 
-  const { name, phone, email, city, password, confirm_password } = values;
+  const { name, phone, email, description, url } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -41,19 +43,18 @@ const LandingPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values });
-    signup({ name, email, password }).then((data) => {
+    contactUsPost({ name, phone, email, description, url }).then((data) => {
       if (data.error) {
         alert("Error: Please Check Input Fields");
       } else {
-        alert("Congrats!! You had successfully Registered");
+        alert("Form Submitted Successfully");
         setValues({
           ...values,
           name: "",
           phone: "",
           email: "",
-          city: "",
-          password: "",
-          confirm_password: "",
+          description: "",
+          url: ""
         });
       }
     });
@@ -236,17 +237,37 @@ const LandingPage = () => {
               borderRadius: 3,
             }}
           >
-            <LocationOnIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+            <InfoIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
               id="input-with-sx"
-              label="City"
+              label="Description"
               variant="standard"
-              onChange={handleChange("city")}
-              value={city}
+              onChange={handleChange("description")}
+              value={description}
               fullWidth
             />
           </Box>
+
           <Box
+            sx={{
+              display: "flex",
+              alignItems: "flex-end",
+              p: 0.5,
+              backgroundColor: "#b2ff59",
+              borderRadius: 3,
+            }}
+          >
+            <InsertLinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+            <TextField
+              id="input-with-sx"
+              label="Attachment URL"
+              variant="standard"
+              onChange={handleChange("url")}
+              value={url}
+              fullWidth
+            />
+          </Box>
+          {/* <Box
             sx={{
               display: "flex",
               alignItems: "flex-end",
@@ -286,7 +307,7 @@ const LandingPage = () => {
               onChange={handleChange("confirm_password")}
               value={confirm_password}
             />
-          </Box>
+          </Box> */}
           <Button
             variant="contained"
             onClick={handleSubmit}

@@ -1,0 +1,62 @@
+.category-table-div{
+    display: flex;
+    /* justify-content: flex-start; */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.category-table{
+    border-collapse: collapse;
+    padding: 20px 60px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    align-items: center;
+    background-color: yelow;
+    color: blue;
+    background-color: aqua;
+    align-items: center;
+}
+
+.category-table thead, .category-table tbody{
+    padding: 10px;
+    font-size: 20px;
+}
+
+.category-table caption{
+    /* padding: 20px; */
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+
+.category-table td, .category-table th{
+    padding: 10px 30px;
+    border: 1px solid blue;
+    
+}
+
+button{
+    padding: 10px 30px;
+    margin-left: 20px;
+    border-radius: 30px;
+    background-color: aqua;
+    color: blue;
+}
+
+.add-category-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-category-div input, .add-category-div button{
+    margin: 10px 0px;
+    background-color: aqua;
+    color: blue;
+}
+
+
+.add-category-form {
+    margin: 30px 0px 10px 0px;
+    display: flex;
+    justify-content: center;
+}

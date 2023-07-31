@@ -5,6 +5,7 @@ import {PrintQuizTable} from '../../../templates/PrintTableUser/PrintTableUser';
 import { Link, useLocation } from 'react-router-dom';
 import { Button, Typography } from '@mui/material';
 import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
+import { isAuthenticated } from '../../../auth';
 
 const QuizByCategoryUser = () => {
 
@@ -12,9 +13,11 @@ const QuizByCategoryUser = () => {
 
   const [quizzes, setQuizzes] = useState([]) ; 
 
+  const {token} = isAuthenticated();
+
   useEffect(()=>{
-    console.log(state);
-    getQuizByCategoryId(state.categoryId).then(data => {
+    // console.log(state);
+    getQuizByCategoryId(state.categoryId, token).then(data => {
         if(data.error) {
             console.error(data.error);
         }
